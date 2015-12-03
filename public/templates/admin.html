@@ -1,0 +1,61 @@
+<h2>Admin Page</h2>
+<hr>
+<div>
+  <h3>Add Product</h3>
+  <p>Brand: <input type="text" ng-model="newProduct.brand" placeholder="Brand..."></p>
+  <p>Name: <input type="text" ng-model="newProduct.product_name" placeholder="Product Name..."></p>
+  <p>Model: <input type="text" ng-model="newProduct.model" placeholder="Model..."></p>
+  <p>Price: <input type="text" ng-model="newProduct.price" placeholder="Price..."></p>
+  <p>Quantity: <input type="text" ng-model="newProduct.quantity" placeholder="Quantity..."></p>
+  <p>Color: <input type="text" ng-model="newProduct.color" placeholder="Color..."></p>
+  <p>Dimension: <input type="text" ng-model="newProduct.dimension" placeholder="Dimension..."></p>
+  <p>Weight: <input type="text" ng-model="newProduct.weight" placeholder="Weight..."></p>
+  <p>Manufactured Country: <input ng-model="newProduct.country_origin" type="text" placeholder="Country..."></p>
+  <p>Product Description:</p>
+  <p><textarea rows="8" cols="50" ng-model="newProduct.note" placeholder="Description..."></textarea></p>
+  <button type="button" ng-click="addNewProduct(newProduct)" >Add Product</button>
+</div>
+<hr>
+
+<div>
+  <p>Search Products: <input type="text" ng-model="searchProduct" placeholder="search..."></p>
+</div>
+<hr>
+
+<div ng-repeat="product in products | filter:searchProduct">
+
+  <div ng-show="displayProduct">
+    <h3>{{product.brand}} {{product.product_name}}</h3>
+    <h5>Model: {{product.model}}</h5>
+    <p>Price: {{product.price | currency}}</p>
+    <p>Quantity: {{product.quantity}}</p>
+    <p>Color: {{product.color}}</p>
+    <p>Dimension: {{product.dimension}} inches</p>
+    <p>Weight: {{product.weight}} pounds</p>
+    <p>Manufactured: {{product.country_origin}}</p>
+    <p>Description: {{product.note}}</p>
+  </div>
+
+  <div ng-show="editProductInput">
+    <p>Brand: <input type="text" ng-model="editField.brand" placeholder="{{product.brand}}"></p>
+    <p>Name: <input type="text" ng-model="editField.product_name" placeholder="{{product.product_name}}"></p>
+    <p>Model: <input type="text" ng-model="editField.model" placeholder="{{product.model}}"></p>
+    <p>Price: <input type="text" ng-model="editField.price" placeholder="{{product.price | currency}}"></p>
+    <p>Quantity: <input type="text" ng-model="editField.quantity" placeholder="{{product.quantity}}"></p>
+    <p>Color: <input type="text" ng-model="editField.color" placeholder="{{product.color}}"></p>
+    <p>Dimension: <input type="text" ng-model="editField.dimension" placeholder="{{product.dimension}}"></p>
+    <p>Weight: <input type="text" ng-model="editField.weight" placeholder="{{product.weight}}"></p>
+    <p>Manufactured Country: <input ng-model="editField.country_origin" type="text" placeholder="{{product.country_origin}}"></p>
+    <p>Product Description:</p>
+    <p><textarea rows="8" cols="50" ng-model="editField.note" placeholder="{{product.note}}"></textarea></p>
+  </div>
+
+  <button ng-show="editButton" type="button" ng-click="displayProduct=false; editProductInput=true; deleteButton=true; applyButton=true; editButton=false; cancelButton=true">Edit</button>
+
+  <button ng-show="applyButton" type="button" ng-click="displayProduct=true; editProductInput=false; deleteButton=false; applyButton=false; editButton=true; cancelButton=false; applyEdit(product._id, editField)">Apply</button>
+
+  <button ng-show="deleteButton" type="button" ng-click="displayProduct=true; editProductInput=false; deleteButton=false; applyButton=false; editButton=true; cancelButton=false; deleteProduct(product._id)">Delete</button>
+
+  <button ng-show="cancelButton" type="button" ng-click="displayProduct=true; editProductInput=false; deleteButton=false; applyButton=false; editButton=true; cancelButton=false">Cancel</button>
+  <hr>
+</div>

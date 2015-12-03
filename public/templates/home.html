@@ -1,0 +1,17 @@
+<h2>Products</h2>
+<div>
+  <p>Search Products: <input type="text" ng-model="searchProduct" placeholder="search..."></p>
+</div>
+<hr>
+<div ng-repeat="product in products | filter:searchProduct">
+  <h3>{{product.brand}} {{product.product_name}}</h3>
+  <h5>Model: {{product.model}}</h5>
+  <p>Price: {{product.price | currency}}</p>
+  <p>Quantity: {{product.quantity}}</p>
+  <p>Color: {{product.color}}</p>
+  <p>Dimension: {{product.dimension}} inches</p>
+  <p>Weight: {{product.weight}} pounds</p>
+  <p>Manufactured: {{product.country_origin}}</p>
+  <p>Description: {{product.note}}</p>
+  <hr>
+</div>
