@@ -29,7 +29,7 @@ module.exports = {
     .findById(req.params.id)
     .exec()
     .then(function(products) {
-      console.log(req.params.id);
+      // console.log(products.brand);
       res.status(200).send(products);
     });
   },

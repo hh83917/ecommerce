@@ -3,7 +3,6 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var mongoose = require('mongoose');
 var ProductCtrl = require('./controllers/ProductCtrl.js');
-// var Product = require('./models/Product.js');
 var port = 9001;
 // var mongojs = require('mongojs');
 
@@ -15,11 +14,33 @@ app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
 app.use(cors());
 
+// Product endpoints
 app.post('/products', ProductCtrl.create);
 app.get('/products', ProductCtrl.read);
 app.get('/products/:id', ProductCtrl.read_id);
 app.put('/products/:id', ProductCtrl.update);
 app.delete('/products/:id', ProductCtrl.remove);
+
+// User endpoints
+app.post('/users', UserCtrl.create);
+app.get('/users', UserCtrl.read);
+app.get('/users/:id', UserCtrl.read_id);
+app.delete('/users', UserCtrl.delete);
+
+// Order endpoints
+app.post('/orders', OrderCtrl.create);
+app.get('/orders', OrderCtrl.read);
+app.get('/orders/:id', OrderCtrl.read_id);
+app.delete('/orders', OrderCtrl.delete);
+
+// Cart endpoints
+app.post('/cart', CartCtrl.create);
+app.get('/cart', CartCtrl.read);
+app.get('/cart/:id', CartCtrl.read_id);
+app.delete('/cart', CartCtrl.delete);
+
+
+
 
 app.listen(port, function() {
   console.log("eCommerce Server Running!");
